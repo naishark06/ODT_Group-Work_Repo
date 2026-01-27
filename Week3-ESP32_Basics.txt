@@ -81,3 +81,4 @@ Assignment Details : Trying diff. codes on an ESP32 for different functionalitie
           light1.off()
           light2.on()
 # Output = The LED will switch on depending on the drop in capacitance i.e, if the capcitance < 200, light 1 is on, if the capacitance >= 200, light 2 is on
+[insert video]
