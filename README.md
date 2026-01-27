@@ -1,2 +1,3 @@
-# ODT_Week2_Circuits
-Week 2 - Group Activity (Naisha RK and Yazhini V) with our circuit diagram and ideation
+# ODT_Group-Work_Dump
+Week 2 - Basic Circuit Connections (Reed Switches)
+Week 3 - ESP32 Basics
