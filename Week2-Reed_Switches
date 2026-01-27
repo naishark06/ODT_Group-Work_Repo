@@ -1,0 +1,10 @@
+Assignment Details : Using a reed switch in the circuit, make a physical model that has led and/or buzzer
+
+Ideation : Similar to OT doors, that have 2 different lights depending on the state of the door.
+Door Open - Green (OT is open)
+Door Closed - Red (Operation in progress)
+
+So, the door is a magnet, 2 reed switches on either side for the light/buzzer to switch on
+[insert circuit diagram picture here]
+
+[insert video/pictures here]
