@@ -1,1 +1,83 @@
+Assignment Details : Trying diff. codes on an ESP32 for different functionalities
 
+1. Switch on the LED built in on the ESP32
+  from machine import Pin
+  light = Pin(12, Pin.OUT)
+  light.on()
+# Output = The light switches on
+  light.off()
+# Output = The light switches off
+[insert video]
+
+2. Make the LED blink
+  from machine import Pin
+  import time
+  light = Pin(12, Pin.OUT)
+  light.on()
+  time.sleep(1)
+  light.off()
+  time.sleep(1)
+# Repeat the last 4 lines for the number of blinks you want
+  Output = The blue light blinks with one second gap between the on and off function
+[insert video]
+
+3. Keeping the code running
+  from machine import Pin
+  import time
+  light = Pin(12, Pin.OUT)
+  
+  n = 4
+  while (n>3):
+# This will keep the code running as the condition for the "while" statement is always true. This can also be replaced with "while True"
+    light.on()
+    time.sleep(1)
+    light.off()
+    time.sleep(1) 
+[insert video]
+
+4. Add a conditional phrase to run the loop
+  from machine import Pin
+  import time
+  light = Pin(12, Pin.OUT)
+
+  n = 10
+  while (n>3):
+    light.on()
+    time.sleep(1)
+    light.off()
+    time.sleep(1)
+    n = n-1
+# This last line will repeat until the condition for the 'while' statement remains true i.e, (n = n-1) > 3
+[insert video]
+
+5. Connecting an external LED to the ESP32 with TouchPad
+  from machine import Pin, TouchPad
+  import time
+  light = Pin(12, Pin.OUT)
+  touch = TouchPad(Pin(4))
+
+  while True:
+      touch_value = touch.read()
+      print(touch_value)
+      time.sleep(1)
+# Output = The capacitance value is continuously printed. It should dip when the wire is being held
+[insert video]
+
+6. Switching on different LED depending on the TouchPad capacitance drop
+  from machine import Pin, TouchPad
+  import time
+  light1 = Pin(12, Pin.OUT)
+  light2 = Pin(18, Pin.OUT)
+  touch = TouchPad(Pin(4))
+
+  while True:
+      touch_value = touch.read()
+      print(touch_value)
+      time.sleep(0.1)
+      if touch_value<200:
+          light1.on()
+          light2.off()
+      if touch_value>=200:
+          light1.off()
+          light2.on()
+# Output = The LED will switch on depending on the drop in capacitance i.e, if the capcitance < 200, light 1 is on, if the capacitance >= 200, light 2 is on
