@@ -105,3 +105,10 @@ ACTIVITY : Car Indicator Lights:
           time.sleep(0.01)
           light1.off()
       time.sleep(0.1)
+   else:
+          light1.on()
+          light2.on()
+          light3.on()
+          light4.on()
+          time.sleep(0.1)
+      time.sleep(0.1)
