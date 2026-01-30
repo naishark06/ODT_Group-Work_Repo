@@ -1,1 +1,33 @@
 7. Switching on the LED with an else statement
+  from machine import Pin, TouchPad
+  import time
+  light = Pin(2,Pin.OUT)
+  touch = TouchPad(Pin(4))
+  while True:
+      touch_value = touch.read()
+      if touch_value<200:
+          light.on()
+          print("The light is on")
+      else:
+          light.off()
+      time.sleep(0.1)
+#The "else" statement is used instead of 2 "if" statements
+
+8. Using "else" statements, light up 2 different LEDs
+  from machine import Pin, TouchPad
+  import time
+  light1 = Pin(12, Pin.OUT)
+  light2 = Pin(18, Pin.OUT)
+  touch = TouchPad(Pin(4))
+
+  while True:
+      touch_value = touch.read()
+      print(touch_value)
+      time.sleep(0.1)
+      if touch_value<200:
+          light1.on()
+          light2.off()
+      else:
+          light1.off()
+          light2.on()
+#This is the same code as No.6 but using an "else" statement instead of 2 "if" statements
