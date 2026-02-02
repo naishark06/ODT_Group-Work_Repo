@@ -71,7 +71,7 @@ iii. Increase and decrease brightness
           led.duty(m)
           time.sleep(0.1) 
 
-ACTIVITY: Combining mulitple input/output systems in a complicated code
+ACTIVITY: Combining mulitple input/output systems in a complicated code (Naisha's Code)
   from machine import Pin, PWM
   import time
   import neopixel
