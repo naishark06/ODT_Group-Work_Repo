@@ -41,7 +41,7 @@
   led.freq(50)
   led.duty(512)
 
-ACTIVITY: Using Pulse Width Modulation, gradually increase and decrease the brightness of the led.
+15. ACTIVITY: Using Pulse Width Modulation, gradually increase and decrease the brightness of the led.
 i. Gradually increasing the brightness of the LED
   from machine import Pin, PWM
   import time
@@ -121,3 +121,19 @@ ACTIVITY: Combining mulitple input/output systems in a complicated code
               my_np[e] = (0,0,0)
               my_np.write()
           led.duty(0)
+
+16. Using a sensor and switching on the LED using 'if' loops
+  from machine import Pin
+  import time
+  sensor = Pin(14, Pin.IN, Pin.PULL_UP)
+  light = Pin(18, Pin.OUT)
+  
+  while True:
+      sensor_val = sensor.value()
+      print(sensor_val)
+      time.sleep(0.1)
+      
+      if sensor_val == 0:
+          light.on()
+      else:
+          light.off()
