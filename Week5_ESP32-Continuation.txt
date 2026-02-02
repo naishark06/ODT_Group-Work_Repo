@@ -70,3 +70,54 @@ iii. Increase and decrease brightness
       for m in range (1023,0,-20):
           led.duty(m)
           time.sleep(0.1) 
+
+ACTIVITY: Combining mulitple input/output systems in a complicated code
+  from machine import Pin, PWM
+  import time
+  import neopixel
+  PB1 = Pin(12, Pin.IN, Pin.PULL_UP)
+  PB2 = Pin(14, Pin.IN, Pin.PULL_UP)
+  led = PWM(Pin(4))
+  led.freq(600)
+  my_np = neopixel.NeoPixel(Pin(18),16)
+  
+  while True:
+      PB1_Val = PB1.value()
+      print(PB1_Val)
+      PB2_Val = PB2.value()
+      print(PB2_Val)
+      time.sleep(0.2)
+      if PB1_Val == 0:
+          for z in range (0,1024,20):
+              led.duty(z)
+              time.sleep(0.1)
+          for a in range (0,16,2):
+              my_np[a] = (0,0,255)
+              time.sleep(0.2)
+              my_np.write()
+          for b in range (1,16,2):
+              my_np[b] = (255,0,0)
+              time.sleep(0.2)
+              my_np.write()
+      else:
+          for e in range (0,16,1):
+              my_np[e] = (0,0,0)
+              my_np.write()
+          led.duty(0)
+      if PB2_Val == 0:
+          for y in range (1023,0,-20):
+              led.duty(y)
+              time.sleep(0.1)
+          for c in range (0,16,2):
+              my_np[c] = (0,255,0)
+              time.sleep(0.2)
+              my_np.write()
+          for d in range (1,16,2):
+              my_np[d] = (255,255,255)
+              time.sleep(0.2)
+              my_np.write()
+      else:
+          for e in range (0,16,1):
+              my_np[e] = (0,0,0)
+              my_np.write()
+          led.duty(0)
