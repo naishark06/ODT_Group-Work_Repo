@@ -1,0 +1,72 @@
+13. Using "for" loop in the neopixel code (reduce the number of lines of code)
+  from machine import Pin
+  import time
+  import neopixel
+  my_np = neopixel.NeoPixel(Pin(18),16)
+  PB = Pin(14, Pin.IN, Pin.PULL_UP)
+  while True:
+      PB_Value = PB.value()
+      print(PB_Value)
+      time.sleep(0.2)
+      if PB_Value == 0:
+          for k in range (0,16,2):
+              my_np[k] = (0,0,255)
+              time.sleep(0.2)
+              my_np.write()
+          for i in range (1,16,2):
+              my_np[i] = (255,0,0)
+              time.sleep(0.2)
+              my_np.write()
+          for k in range (0,16,2):
+              my_np[k] = (0,255,0)
+              time.sleep(0.2)
+              my_np.write()
+          for i in range (1,16,2):
+              my_np[i] = (255,255,255)
+              time.sleep(0.2)
+              my_np.write()
+          else:
+              for m in range (0,16,1):
+                  my_np[m] = (0,0,0)
+                  time.sleep(0.2)
+                  my_np.write()
+
+14. Pulse Modulation
+# Duty Cycle = (On Time/On Time + Off Time) x 100
+# Duty Cycle is used as different value on MicroPython (PWM value)
+(100% - 1023/ 75% - 768/ 50% - 512/ 25% - 256/ 0% - 0)
+
+  from machine import Pin, PWM
+  led = PWM(Pin(14))
+  led.freq(50)
+  led.duty(512)
+
+ACTIVITY: Using Pulse Width Modulation, gradually increase and decrease the brightness of the led.
+i. Gradually increasing the brightness of the LED
+  from machine import Pin, PWM
+  import time
+  led = PWM(Pin(14))
+  led.freq(600)
+  for k in range (0,1024,5):
+      led.duty(k)
+      time.sleep(0.1)
+ii. Gradually decreasing the brightness of the LED
+  from machine import Pin, PWM
+  import time
+  led = PWM(Pin(14))
+  led.freq(600)
+  for k in range (1023,0,-10):
+      led.duty(k)
+      time.sleep(0.1)
+iii. Increase and decrease brightness 
+  from machine import Pin, PWM
+  import time
+  led = PWM(Pin(14))
+  led.freq(600)
+  while True:
+      for k in range (0,1024,20):
+          led.duty(k)
+          time.sleep(0.1)
+      for m in range (1023,0,-20):
+          led.duty(m)
+          time.sleep(0.1) 
