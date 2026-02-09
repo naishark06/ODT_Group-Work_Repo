@@ -1,0 +1,136 @@
+17. Lists and Appends
+  lists = ['a','b','c','d','e','f']
+  print(lists)
+  LISTS = lists.append('g ')
+  print(lists)
+
+18. Using Lists and random in neopixel
+  from machine import Pin
+  import time
+  import neopixel
+  import random
+  
+  np = neopixel.NeoPixel(Pin(18),16) 
+  
+  color = [(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(255,255,255)]
+  
+  while True:
+      a = random.randint(0,6)
+      for z in range(0,16,2):
+          np[z] = color[a]
+          np.write()
+          time.sleep(0.1)
+      b = random.randint(0,6)
+      for y in range(1,16,2):
+          np[y] = color[b]
+          np.write()
+          time.sleep(0.1)
+
+19. Randomising RGB values using lists also
+  from machine import Pin
+  import time
+  import neopixel
+  import random
+  
+  np = neopixel.NeoPixel(Pin(18),16)
+  
+  while True:
+      r = random.randint(0,255)
+      g = random.randint(0,255)
+      b = random.randint(0,255)
+      for i in range(0,16,2):
+          np[i] = (r,g,b)
+          np.write()
+          time.sleep(0.1)
+      R = random.randint(0,255)
+      G = random.randint(0,255)
+      B = random.randint(0,255)
+      for e in range(1,16,2):
+          np[e] = (R,G,B)
+          np.write()
+          time.sleep(0.1)
+
+20. elif function
+  x = 25
+  if x>0 and x<2:
+      print("Yo")
+  elif x>4 and x<6:
+      print("Hello!")
+  elif x>6 and x<8:
+      print("Namaste!")
+  else:
+      print("Bye!")
+
+21. Using PushButtons to add increments to numbers
+  from machine import Pin
+  import time
+  
+  pb = Pin(12, Pin.IN, Pin.PULL_UP)
+  x = 0
+  while x<5:
+      pb_value = pb.value()
+      if pb_value == 0:
+          x = (x+1)
+          print(x)
+          time.sleep(0.5)
+      if x>=5:
+          x = 0
+
+22. Lighting up the neopixel according to the above code
+  from machine import Pin
+  import time
+  import neopixel
+  
+  np = neopixel.NeoPixel(Pin(18),16)
+  pb = Pin(12, Pin.IN, Pin.PULL_UP)
+  PB = Pin(14,Pin.IN,Pin.PULL_UP)
+  x = 0
+  
+  while x<16:
+      np[x] = (0,0,0)
+      np.write()
+      pb_value = pb.value()
+      PB_value = PB.value()
+      print(PB_value)
+      time.sleep(0.2)
+      if pb_value == 0:
+          np[x] = (255,255,255)
+          np.write()
+          x = (x+1)
+          print(x)
+          time.sleep(0.1)
+      if PB_value == 0:
+          for a in range (0,16,1):
+              np[a] = (0,0,0)
+              np.write()
+          x = 0
+
+23. Lighting up neopixel using above code and also switching it off in reverse
+  from machine import Pin
+  import time
+  import neopixel
+  
+  np = neopixel.NeoPixel(Pin(18),16)
+  pb = Pin(12, Pin.IN, Pin.PULL_UP)
+  PB = Pin(14,Pin.IN,Pin.PULL_UP)
+  x = 0
+  
+  while x<16:
+      np[x] = (0,0,0)
+      np.write()
+      pb_value = pb.value()
+      PB_value = PB.value()
+      time.sleep(0.2)
+      if pb_value == 0:
+          np[x] = (255,255,255)
+          np.write()
+          x = (x+1)
+          print(x)
+          time.sleep(0.1)
+      if PB_value == 0:
+          np[x] = (0,0,0)
+          np.write()
+          x = (x-1)
+          print(x)
+          time.sleep(0.1)
+
