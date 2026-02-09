@@ -134,3 +134,102 @@
           print(x)
           time.sleep(0.1)
 
+24. Servo Motor (start at duty35 and go to duty77)
+  from machine import Pin, PWM
+  import time
+  
+  servo = PWM(Pin(18))
+  while True:
+      servo.freq(50)
+      servo.duty(35)
+      time.sleep(0.5)
+      servo.duty(77)
+      time.sleep(0.5)
+
+25. Make the servo motor oscillate
+  from machine import Pin, PWM
+  import time
+  
+  servo = PWM(Pin(18))
+  servo.freq(50)
+  while True:
+      for k in range (35,110,5):
+          servo.duty(k)
+          time.sleep(0.2)
+      for m in range (110,35,-5):
+          servo.duty(m)
+          time.sleep(0.2)
+
+26. PWM in buzzers
+  from machine import Pin,PWM
+  import time
+  
+  buzzer = PWM(Pin(18))
+  buzzer.duty(100)
+  x = 1
+  
+  while True:
+      buzzer.freq(x)
+      time.sleep(1)
+      x = x+1
+
+ACTIVITY: Using PWM make a tune on your buzzer (can use AI)
+~MARIO THEME~
+  from machine import Pin, PWM
+  import time
+  buzzer = PWM(Pin(18))
+  buzzer.duty(400)
+  
+  TEMPO = 0.95 
+  E7 = 2637
+  C7 = 2093
+  G7 = 3136
+  G6 = 1568
+  E6 = 1319
+  A6 = 1760
+  B6 = 1976
+  AS6 = 1865
+  F7 = 2794
+  D7 = 2349
+  A7 = 3520
+  
+  mario = [
+      (E7, 0.15), (E7, 0.15), (0, 0.10),
+      (E7, 0.15), (0, 0.10),
+      (C7, 0.15), (E7, 0.15), (0, 0.10),
+      (G7, 0.30), (0, 0.20),
+      (G6, 0.30), (0, 0.20),
+  
+      (C7, 0.25), (0, 0.10),
+      (G6, 0.25), (0, 0.10),
+      (E6, 0.25), (0, 0.10),
+      (A6, 0.15), (0, 0.05),
+      (B6, 0.15), (0, 0.05),
+      (AS6, 0.15),
+      (A6, 0.25),
+  
+      (G6, 0.20),
+      (E7, 0.20),
+      (G7, 0.20),
+      (A7, 0.25),
+      (F7, 0.15), (G7, 0.15),
+      (0, 0.10),
+      (E7, 0.15),
+      (C7, 0.15),
+      (D7, 0.15),
+      (B6, 0.30),
+  ]
+  def play(note, duration):
+      if note == 0:
+          buzzer.duty(0)
+      else:
+          buzzer.freq(note)
+          buzzer.duty(512)
+      time.sleep(duration * TEMPO)
+      buzzer.duty(0)
+      time.sleep(0.01 * TEMPO)  # tight gap = authentic feel
+  
+  for note, length in mario:
+      play(note, length)
+
+buzzer.deinit()
