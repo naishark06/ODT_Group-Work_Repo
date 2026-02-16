@@ -1,0 +1,36 @@
+27. PWM in Servo Motors using lists
+  from machine import Pin, PWM
+  import time
+  
+  Duty_Value = [35, 55, 85, 110]
+  servo = PWM(Pin(18))
+  servo.freq(50)
+  while True:
+      for a in Duty_Value:
+          servo.duty(a)
+          time.sleep(0.5)
+28. List in a List
+  my_list = [[12,56,34,54],[13,65,34,67],[56,45,23,76]]
+  for i in my_list:
+      print(i)
+      for k in i:
+          print(k)
+29. "break" to stop a loop from running
+  from machine import Pin
+  import time
+  import neopixel
+  
+  np = neopixel.NeoPixel(Pin(4),16)
+  pb = Pin(14, Pin.IN, Pin.PULL_UP)
+  
+  while True:
+      pb_val = pb.value()
+      if pb_val == 0:
+          for i in range(0,16,1):
+              pb_val = pb.value()
+              if pb_val == 0:
+                  break (this will break the "for" loop since "if" is not a "loop" but it is a "conditional statement")
+              np[i]=(255,0,0)
+              np.write()
+              time.sleep(0.1)
+      time.sleep(0.2)
