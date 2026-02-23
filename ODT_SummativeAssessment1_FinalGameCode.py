@@ -22,14 +22,14 @@ while True:
     win = 0 #dont question it, it makes sense later on in the code :D
     pb_value = pb.value()
     time.sleep(0.1)
-    led1.on()
-    led2.on()
-    led3.on()
+    led1.off()
+    led2.off()
+    led3.off()
     for a in range (0,16,1):
         np[a] = (0,0,0)
         np.write()
     while pb.value() == 1: #ur skipping the naming ceremony and seeing value (skip the shenanigans)
-        print("Let's Begin!")
+        print("Ready Steady Po!")
         while lives > 0 and win == 0: #this is where it makes sense, to prevent this loop from running unnecesarily, youve added a win condition also
             pb_value = pb.value()
             wire_value = wire.read()
@@ -50,7 +50,7 @@ while True:
                     buzzer.freq(50) #tune for losing
                     time.sleep(1)
                     buzzer.duty(0)
-                    print("Oh No! You Lost! Better Luck Next Time!")
+                    print("HA LOSER, KILL YOURSELF!")
             if IRsensor_value == 0: #omg they came to the end
                 for a in range (0,16,1): #it goes one circle and stops
                     r = random.randint(0,255)
