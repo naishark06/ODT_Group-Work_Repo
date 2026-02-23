@@ -1,0 +1,25 @@
+from machine import Pin, TouchPad, PWM
+import time
+import random
+import neopixel
+
+led1= Pin(12,Pin.OUT)
+led2= Pin(14,Pin.OUT)
+led3= Pin(27,Pin.OUT)
+pb = Pin(25,Pin.IN, Pin.PULL_UP)
+TP= TouchPad(Pin(4))
+IRsensor = Pin(32, Pin.IN, Pin.PULL_UP)
+leds = [led1,led2,led3]
+buzzer = PWM(Pin(18))
+buzzer.duty(0)
+np = neopixel.NeoPixel(Pin(21),16)
+
+while True:
+    lives = 3
+    win = 0
+    TP_val = TP.read()
+    pb_value = pb.value()
+    time.sleep(0.1)
+    led1.off()
+    led2.off()
+    led3.off()
