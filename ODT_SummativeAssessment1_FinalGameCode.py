@@ -13,6 +13,39 @@ np = neopixel.NeoPixel(Pin(21),16)
 
 buzzer = PWM(Pin(18))
 buzzer.duty(0)
+def play_tone(freq, duration):
+    buzzer.freq(freq)
+    buzzer.duty(512)  # 50% volume
+    time.sleep(duration)
+    buzzer.duty(0)
+    time.sleep(0.05)
+
+def play_tune(tune):
+    for freq, dur in tune:
+        play_tone(freq, dur)
+
+# Winning melody (rising happy sound)
+WIN_TUNE = [
+    (784, 0.12),   # G5
+    (988, 0.12),   # B5
+    (1175, 0.15),  # D6
+    (1568, 0.2),   # G6
+    (1318, 0.15),  # E6
+    (1568, 0.4),   # G6 hold
+    (2093, 0.6)    # C7 BIG finish
+]
+# Losing melody (dramatic falling sound)
+LOSE_TUNE = [
+    (1046, 0.25),  # C6
+    (880, 0.25),   # A5
+    (784, 0.3),    # G5
+    (698, 0.3),    # F5
+    (659, 0.35),   # E5
+    (587, 0.4),    # D5
+    (523, 0.5),    # C5
+    (415, 0.7),    # G#4 (darker tone)
+    (392, 1.2)     # G4 long dramatic fall
+]
 
 wire = TouchPad(Pin(4))
 IRsensor = Pin(32, Pin.IN, Pin.PULL_UP)
@@ -39,18 +72,14 @@ while True:
             if wire.read() < 400: #losing code cuz capacitance dipped
                 time.sleep(0.1)
                 lives = lives-1
-                leds[lives].off() #3-1 = 2 so led[2] will switch off which on the list is the 3rd led
-                buzzer.duty(100)
-                buzzer.freq(2)
-                time.sleep(1)
-                buzzer.duty(0)
+                leds[lives].on() #3-1 = 2 so led[2] will switch off which on the list is the 3rd led
+                play_tune([(400,0.15),(250,0.2)])  # quick hurt sound
                 print("Oops! You lost a life!")
+                time.sleep(1)
                 if lives == 0: #all lives damar
-                    buzzer.duty(100)
-                    buzzer.freq(50) #tune for losing
-                    time.sleep(1)
-                    buzzer.duty(0)
+                    play_tune(LOSE_TUNE)
                     print("HA LOSER, KILL YOURSELF!")
+                    time.sleep(1)
             if IRsensor_value == 0: #omg they came to the end
                 for a in range (0,16,1): #it goes one circle and stops
                     r = random.randint(0,255)
@@ -59,18 +88,14 @@ while True:
                     np[a] = (r,g,b) #can we add a random here hmmmm
                     time.sleep(0.1)
                     np.write()                        
-                buzzer.duty(100)
-                buzzer.freq(10) #tune for winning yay
-                time.sleep(2)
-                for a in range (0,16,1):#after they won little bit shut up and switch off
-                    np[a] = (0,0,0)
-                    np.write()
+                play_tune(WIN_TUNE)
                 print("Yay! You Won!")
-                buzzer.duty(0)
+                time.sleep(1)
                 win = 1 #see now the condition on top where "win == 0" wont be true anymore and the loop wont run infinitely like one gandu
             #interrupts the game nvm the no. of lives left
             if pb_value == 0:
                 print("Lets Start Again!")
+                time.sleep(1)
                 break #leaves while lives > 0
             #resets the game after win/lose
             #yay code finish
