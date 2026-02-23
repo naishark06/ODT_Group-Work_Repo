@@ -1,3 +1,5 @@
+Link to Video: https://youtu.be/lPftp25TVd0
+
 from machine import Pin, TouchPad, PWM
 import time
 import neopixel
@@ -99,5 +101,3 @@ while True:
                 break #leaves while lives > 0
             #resets the game after win/lose
             #yay code finish
-
-Link to Video: https://youtu.be/lPftp25TVd0
