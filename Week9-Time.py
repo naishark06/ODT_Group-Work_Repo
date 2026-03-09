@@ -106,3 +106,24 @@
           distance = duration / 58
           print("Distance:", distance, "cm")
       time.sleep(1)
+42. DC Motor
+  from machine import Pin, PWM
+  import time
+  
+  IN1 = Pin(13, Pin.OUT)
+  IN2 = Pin(12, Pin.OUT)
+  ENA = PWM(Pin(15))
+  ENA.freq(1000)
+  pb1 = Pin(4, Pin.IN, Pin.PULL_UP)
+  pb2 = Pin(5, Pin.IN, Pin.PULL_UP)
+  
+  if pb1.value() == 0:
+    ENA.duty(1000)
+    IN1.value(1)
+    IN2.value(0)
+    time.sleep(3)
+  if pb2.value() == 0:
+    ENA.duty(1000)
+    IN1.value(0)
+    IN2.value(1)
+    time.sleep(3)
