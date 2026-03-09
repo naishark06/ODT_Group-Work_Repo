@@ -91,5 +91,22 @@ while True:
         print("Distance", distance, "cm")
         
     time.sleep(1)
-    
+
+6.
+#DC motor code
+
+from machine import Pin, PWM
+import time
+
+IN1 = Pin(13, Pin.OUT)
+IN2 = Pin(12, Pin.OUT)
+
+while True:
+    IN1.value(1)
+    IN2.value(0)
+    time.sleep(3)
+    IN1.value(0)
+    IN2.value(1)
+    time.sleep(3)
+
 
