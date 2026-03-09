@@ -66,3 +66,43 @@
   print (T2, "miliseconds. Without a for loop")
   Difference = time.ticks_diff(T2, T1)
   print (Difference, "miliseconds. The total difference with a for loop and without a for loop")
+40. Reaction Time Test
+  import time
+  from machine import Pin
+  import random
+  pb = Pin(32, Pin.IN, Pin.PULL_UP)
+  led = Pin(4, Pin.OUT)
+  
+  while True:
+      R = random.randint(0,5)
+      print(R)
+      led.value(0)
+      time.sleep(R)
+      led.value(1)
+      start = time.ticks_ms()
+      print(start)
+      while pb.value() == 1:
+          stop = time.ticks_ms()
+      led.value(0)
+      Time = time.ticks_diff(stop,start)
+      print(Time, "miliseconds. This is your reaction time")
+      time.sleep(1)
+41. Ultrasound Sensor Code (Object distance measurement)
+  from machine import Pin, time_pulse_us
+  import time
+  trig = Pin(32, Pin.OUT)
+  echo = Pin(14, Pin.IN)
+  
+  while True:
+      trig.off()
+      time.sleep_us(2)
+      trig.on()
+      time.sleep(10)
+      trig.off
+      duration = time_pulse_us(echo 1, 30000)
+      if duration<0:
+          print("No object detected (Timeout)")
+      else:
+          distance = duration / 58
+          print("Distance:", distance, "cm")
+      time.sleep(1)
