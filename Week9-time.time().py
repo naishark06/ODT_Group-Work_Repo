@@ -114,5 +114,32 @@ ENA.freq(1000)
     time.sleep(3)
   
 7.
+#DC motor code
 
+from machine import Pin, PWM
+import time
 
+IN1 = Pin(13, Pin.OUT)
+IN2 = Pin(12, Pin.OUT)
+ENA = PWM(Pin(15))
+ENA.freq(1000)
+pb1 = Pin(5, Pin.IN, Pin.PULL_UP) #yellow
+pb2 = Pin(4, Pin.IN, Pin.PULL_UP) #brown
+
+pb1_value = pb1.value()
+pb2_value = pb2.value()
+
+if pb1_value == 0:
+    print(pb1_value)
+    ENA.duty(750)
+    IN1.value(1)
+    IN2.value(0)
+    time.sleep(3)
+    
+if pb2_value == 0:
+    print(pb2_value)
+    ENA.duty(750)
+    IN1.value(0)
+    IN2.value(1)
+    time.sleep(3)
+  
